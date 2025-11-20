@@ -1,4 +1,4 @@
-# 🚀 Spaceman Game
+My Spaceman Game
 
 Spaceman Game Screenshot.
 
@@ -31,10 +31,10 @@ Play Spaceman Online-(https://Rebecca-10.github.io/spaceman-game/)
  File Structure
 
 spaceman-game/
-├─ index.html # Main HTML file
-├─ style.css # Stylesheet with Flexbox layout
-├─ app.js # JavaScript logic for the game
-└─ README.md # Project documentation
+index.html # Main HTML file
+style.css # Stylesheet with Flexbox layout
+app.js # JavaScript logic for the game
+README.md # Project documentation
 
 
 
