@@ -1,89 +1,109 @@
+//SPACEMAN-GAME
 
 
-// create object game and give it its properties 
 const game = {
-    words: ["banana", "apple"],      // keeping it simple with two word array 
-    secretWord: "",                  
-    lettersGuessed: [],
-    wrongGuesses: 0,
-    maxGuesses: 5
+    // Creat object game and all its  properties 
+    words: ["banana", "apple"],       // Array of possible secret words made it simple with two can be any 
+    secretWord: "",                   // hold guessed word after playing
+    lettersGuessed: [],               // Array to hold letters the player has guessed
+    wrongGuesses: 0,                  // Counter for incorrect guesses we start with 0 since we have full lives 
+    maxGuesses: 5,                    // Maximum number of wrong guesses allowed
+
+    //  DOM Elements to manipulate 
+    output: document.getElementById("output"),          // Element to display messages
+    wordDisplay: document.getElementById("wordDisplay"),// Element to show current word state
+    lettersDisplay: document.getElementById("lettersDisplay"), // Element for guessed letters
+    livesDisplay: document.getElementById("livesDisplay"),     // Element for lives left
+    input: document.getElementById("letterInput"),     // Input box for player guesses
+    button: document.getElementById("guessButton"),    // Button to submit guess
+
+    // Start the Game
+    start() {
+        this.secretWord = this.words[Math.floor(Math.random() * this.words.length)]; // randomise my words from the array 
+        this.lettersGuessed = [];   // Reset guessed letters after the play
+        this.wrongGuesses = 0;      // Reset wrong guess counter after the play 
+
+        this.output.textContent = ""; // Clear any previous game messages
+
+        this.display(" Ready to play Spaceman!"); // Welcome message
+        this.display(`Your secret word has ${this.secretWord.length} letters.`); // Show word length
+
+        this.render();               // Update the displayed word, guesses, and lives
+        this.button.disabled = false; // Enable the guess button
+        this.button.onclick = () => this.handleGuess(); // Attach guess handler to button
+    },
+
+    // Display Messages 
+    display(message) {
+        this.output.textContent += message + "\n"; // Append a message to the output area
+    },
+
+    // Get Current Word State 
+    getGuessedWord() {
+        // Return word with guessed letters revealed, others as "_"
+        return [...this.secretWord]
+            .map(letter => (this.lettersGuessed.includes(letter) ? letter : "_"))
+            .join(" ");
+    },
+
+    // Check if the Word is Fully Guessed 
+    isWordGuessed() {
+        // Returns true if every letter in the secret word has been guessed
+        return [...this.secretWord].every(letter =>
+            this.lettersGuessed.includes(letter)
+        );
+    },
+
+    // Handle Player Guess 
+    handleGuess() {
+        const guess = this.input.value.toLowerCase(); // Get input and convert to lowercase
+        this.input.value = "";                         // Clear input box
+
+        // Validate input: must be a single letter a-z
+        if (!guess || guess.length !== 1 || !/[a-z]/.test(guess)) {
+            this.display(" Please enter ONE letter.");
+            return;
+        }
+
+        // Check for repeated guess
+        if (this.lettersGuessed.includes(guess)) {
+            this.display(`You already guessed "${guess}". Try a new letter.`);
+            return;
+        }
+
+        this.lettersGuessed.push(guess); // Add guess to guessed letters array
+
+        // Check if guess is correct or wrong
+        if (this.secretWord.includes(guess)) {
+            this.display(`Correct! "${guess}" is in the word.`);
+        } else {
+            this.wrongGuesses++; // Increment wrong guess counter
+            this.display(`Wrong! "${guess}" is not in the word.`);
+        }
+
+        this.render();    // Update displayed word, guesses, lives
+        this.checkEnd();  // Check if the game is won or lost
+    },
+
+    // Render Word, Letters, and Lives 
+    render() {
+        this.wordDisplay.textContent = this.getGuessedWord(); // Show current word state
+        this.lettersDisplay.textContent = "Guessed: " + this.lettersGuessed.join(", "); // Show guessed letters
+        this.livesDisplay.textContent = `Lives left: ${this.maxGuesses - this.wrongGuesses}`; // Show remaining lives
+    },
+
+    // Check Win/Loss Conditions 
+    checkEnd() {
+        if (this.isWordGuessed()) { // Player guessed all letters
+            this.display(`YOU WIN! The word was "${this.secretWord}".`);
+            this.button.disabled = true; // Disable further guesses
+        } 
+        else if (this.wrongGuesses >= this.maxGuesses) { // Player ran out of lives
+            this.display(`YOU LOST! The word was "${this.secretWord}".`);
+            this.button.disabled = true; // Disable further guesses
+        }
+    }
 };
 
-game.secretWord = game.words[Math.floor(Math.random() * game.words.length)];
-
-// manipulate dom
-const output = document.getElementById("output");
-
-// --- Functions ---
-
-// show message output on new line
-function display(message) {
-    output.textContent += message + "\n";
-}
-
-// function??
-function getGuessedWord() {
-    return game.secretWord
-        .split("")
-        .map(letter => (game.lettersGuessed.includes(letter) ? letter : "_"))
-        .join(" ");
-}
-
-// Check word vs guess
-function isWordGuessed() {
-    return game.secretWord.split("").every(letter => game.lettersGuessed.includes(letter));
-}
-
-
-function takeTurn() {
-    
-    display("\nWord: " + getGuessedWord());
-    display("Guessed letters: " + game.lettersGuessed.join(", "));
-    display(`Lives left: ${game.maxGuesses - game.wrongGuesses}\n`);
-
-    //  win/lose condition
-    if (isWordGuessed()) {
-        display("YOU WIN! The word was: " + game.secretWord);
-        return;
-    }
-    if (game.wrongGuesses >= game.maxGuesses) {
-        display("YOU LOST! The word was: " + game.secretWord);
-        return;
-    }
-
-    // input your letter guess
-    let guess = prompt("Guess a letter:").toLowerCase();
-
-    // Validate input taking only letters
-    if (!guess || guess.length !== 1 || !/[a-z]/.test(guess)) {
-        alert("Please enter a single letter (a-z).");
-        takeTurn();
-        return;
-    }
-
-    // for my double letters or more 
-    if (game.lettersGuessed.includes(guess)) {
-        alert("You already guessed that letter. Try a different one!");
-        takeTurn();
-        return;
-    }
-
-    // Add letter to guessed array
-    game.lettersGuessed.push(guess);
-
-    // Check correct word vs guess
-    if (game.secretWord.includes(guess)) {
-        display(`Correct guess: "${guess}"!`);
-    } else {
-        game.wrongGuesses++;
-        display(` Wrong guess: "${guess}"!`);
-    }
-
-    takeTurn();
-}
-
-
-display("Ready to play Spaceman!");
-display(`Your secret word has ${game.secretWord.length} letters.`);
-
-takeTurn(); // first letter go
+//start the game 
+game.start(); // Call the start() method to initialize the game can also use innit keyword 

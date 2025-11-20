@@ -4,17 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spaceman Game</title>
-   <link rel="stylesheet" href="style.css">
-
-   <script defer src="app.js"></script>
-   
+    <link rel="stylesheet" href="style.css">
+    <script defer src="app.js"></script>
 </head>
 <body>
-    <h1>Spaceman Game</h1>
+    <div class="container">
+        <h1>My Spaceman Game</h1>
 
-   
-    <div id="output"></div>
+        <!-- Game Instructions -->
+        <div id="instructions">
+            <h2>Here I will teach you how to play my way:</h2>
+            <ul>
+                <li>Guess the secret word one letter at a time.</li>
+                <li>You have <span id="maxGuesses">5</span> lives — each wrong guess loses a life.</li>
+                <li>Correct guesses reveal letters in the word.</li>
+                <li>Win by guessing the entire word before running out of lives!</li>
+                <li>Click "Guess" after typing a letter.</li>
+            </ul>
+        </div>
 
+        <!-- Output messages -->
+        <div id="output"></div>
 
+        <!-- Word display -->
+        <p id="wordDisplay"></p>
+
+        <!-- Guessed letters -->
+        <p id="lettersDisplay"></p>
+
+        <!-- Lives remaining -->
+        <p id="livesDisplay"></p>
+
+        <!-- Input area -->
+        <input id="letterInput" type="text" maxlength="1" placeholder="Enter a letter" />
+
+        <!-- Guess button -->
+        <button id="guessButton">Guess</button>
+    </div>
 </body>
-</html>
+</html
