@@ -1,22 +1,58 @@
-SPACEMAN
-A player must loose after a certain number of guesses 
-Must have: win or loose condition 
+# 🚀 Spaceman Game
+
+Spaceman Game Screenshot.
+
+Description
+Spaceman is a browser-based word guessing game inspired by Hangman.  
+Players try to guess a secret word, one letter at a time, before running out of lives.  
+The game was built to practice JavaScript, DOM manipulation, arrays, and event handling, and it demonstrates how to structure a small interactive browser based app 
 
 
-Start the game and show a welcome message. Ready to play spaceman!
-Choose a random secret word from a list of words. Im starting with 2 word array 
-Create a line of blank spaces for each letter in the word so the player knows how long it is.
-Set the number of wrong guesses the player is allowed !! Any number of choice I choose 5
-Keep a list of all letters the player has guessed.Repeat the following steps until the player either guesses the whole word or uses up all their chances:
-Show the player the word progress (letters they’ve guessed and blanks).
-Show the player which letters they have already guessed.
-Show how many guesses they have left.
-Ask the player to guess a letter.
-Make sure the player’s input is valid (only one letter, not already guessed).
-Add the letter to the list of guessed letters.
-If the letter is in the secret word, reveal that letter in the word.
-If the letter is NOT in the word, take away one life and update the spaceman graphic or stage.
-If player inputs a double letter let them know its already used 
-     When the loop ends, check if the player won or lost:
-If the player guessed the whole word, show a winning message.
-If they ran out of guesses, show a losing message and reveal the word.
+
+Background
+Hi! I'm Becca, a software engineer and a medical technician. 
+I wanted to create a simple, fun game that showcases my understanding of JavaScript objects, arrays, DOM manipulation, and event-driven programming.  
+This project also helped me practice UI/UX design with CSS Flexbox to make the game visually appealing and accessible.
+
+How to Play
+1. The game will randomly select a secret word from a small set of words.  
+2. Your goal is to guess the word one letter at a time.  
+3. Enter a letter in the input box and click Guess.  
+4. Correct guesses reveal the letter in the word.  
+5. Wrong guesses decrease your remaining lives.  
+6. Win by guessing all letters before you run out of lives!  
+7. The game displays all letters guessed and the number of lives left.
+
+
+Live Demo
+Play Spaceman Online-(https://Rebecca-10.github.io/spaceman-game/)
+
+
+ File Structure
+
+spaceman-game/
+├─ index.html # Main HTML file
+├─ style.css # Stylesheet with Flexbox layout
+├─ app.js # JavaScript logic for the game
+└─ README.md # Project documentation
+
+
+
+Technologies Used
+- HTML5  
+- CSS3 (Flexbox for layout)  
+- JavaScript (objects,arrays, DOM manipulation)  
+
+
+Next Steps / Stretch Goals
+1- Add a **Restart Game** button to play again without refreshing the page.  
+2- Add more words and categories for variety.  
+3- Add animations or sound effects for correct/incorrect guesses.  
+4- Make the game fully mobile responsive.
+5- add dificulty level
+
+
+ Attributions
+1- No external libraries were used.  
+2- Inspired by traditional Hangman games and classroom lessons on JavaScript and DOM manipulation.
+
