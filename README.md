@@ -1,6 +1,5 @@
 My Spaceman Game
 
-Spaceman Game Screenshot.
 
 Description
 Spaceman is a browser-based word guessing game inspired by Hangman.  
@@ -10,7 +9,7 @@ The game was built to practice JavaScript, DOM manipulation, arrays, and event h
 
 
 Background
-Hi! I'm Becca, a software engineer and a medical technician. 
+Hi! I'm Becca, a software engineer. 
 I wanted to create a simple, fun game that showcases my understanding of JavaScript objects, arrays, DOM manipulation, and event-driven programming.  
 This project also helped me practice UI/UX design with CSS Flexbox to make the game visually appealing and accessible.
 
